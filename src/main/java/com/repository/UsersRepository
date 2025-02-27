@@ -1,0 +1,18 @@
+package com.loginform.repository;
+
+import com.loginform.model.UserModel;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import java.util.Optional;
+
+@Repository
+public interface UserRepository extends JpaRepository<UserModel, Integer> {
+
+    Optional<UserModel> findByLogin(String login);
+
+    Optional<UserModel> findByEmail(String email);
+
+    boolean existsByLogin(String login);
+    
+    boolean existsByEmail(String email);
+}
