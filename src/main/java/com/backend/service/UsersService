@@ -1,0 +1,24 @@
+package com.Login_Form.service;
+
+import com.Login_Form.model.UserModel;
+import com.Login_Form.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserService {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    public UserModel registerUser(String login, String password, String email) {
+        if (login == null || password == null || email == null) {
+            throw new IllegalArgumentException("Login, password, and email must not be null");
+        }
+            UserModel userModel = new UserModel(login, password, email);
+            return userRepository.save(userModel);
+    }
+    public Optional<UserModel> loginUser(String login, String password) {
+        return userRepository.findByLogin(login);
+    }
+}
