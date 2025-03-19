@@ -1,14 +1,48 @@
-// src/App.js
-
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import LoginPage from './LoginPage'; // Import LoginPage component
 
 function App() {
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Login:', login);
+    console.log('Password:', password);
+  };
+
   return (
     <div className="App">
-      <h1>Welcome to My App</h1>
-      <LoginPage /> {/* Render the LoginPage component */}
+      <div className="login-container">
+        <h1>Login</h1>
+        <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label htmlFor="login">Username</label>
+            <input
+              type="text"
+              id="login"
+              value={login}
+              onChange={(e) => setLogin(e.target.value)}
+              placeholder="Enter your username"
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+
+          <button type="submit" className="login-btn">Login</button>
+        </form>
+      </div>
     </div>
   );
 }
